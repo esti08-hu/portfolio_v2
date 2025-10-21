@@ -100,12 +100,12 @@ function App() {
 
           {/* 3D Scene Background */}
           <Suspense fallback={null}>
-            <ThreeScene scene="portfolio" className="fixed inset-0 pointer-events-none z-0" />
+            <ThreeScene scene="portfolio" className="fixed inset-0 pointer-events-none z-0" aria-hidden="true" />
           </Suspense>
 
           <Header />
           <ExperimentalNav />
-          <main>
+          <main role="main">
             <Hero />
             <About />
             <Projects />
@@ -136,8 +136,8 @@ function App() {
           <Suspense fallback={null}>
             <PerformanceMonitor
               enabled={import.meta.env.PROD}
-              onMetricsCollected={(metrics) => {
-                console.log('Performance metrics:', metrics);
+              onMetricsCollected={() => {
+                // Performance metrics collected for analytics
                 // In production, you could send this to analytics
               }}
             />

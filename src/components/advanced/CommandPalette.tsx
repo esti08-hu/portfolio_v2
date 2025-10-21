@@ -133,6 +133,12 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
               onChange={(e) => setQuery(e.target.value)}
               placeholder={placeholder}
               className="flex-1 bg-transparent text-slate-200 placeholder-slate-400 outline-none"
+              aria-label="Search commands"
+              role="combobox"
+              aria-expanded="true"
+              aria-haspopup="listbox"
+              aria-autocomplete="list"
+              aria-activedescendant={filteredCommands[selectedIndex] ? `command-${filteredCommands[selectedIndex].id}` : undefined}
             />
             <div className="flex items-center space-x-1 ml-3">
               <kbd className="px-2 py-1 text-xs bg-slate-800 text-slate-400 rounded border border-slate-600">
@@ -143,9 +149,9 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
           </div>
 
           {/* Commands list */}
-          <div className="max-h-80 overflow-y-auto">
+          <div className="max-h-80 overflow-y-auto" role="listbox" aria-label="Command results">
             {filteredCommands.length === 0 ? (
-              <div className="px-4 py-8 text-center text-slate-400">
+              <div className="px-4 py-8 text-center text-slate-400" role="status" aria-live="polite">
                 <div className="text-2xl mb-2">🔍</div>
                 <div>No commands found</div>
                 <div className="text-sm text-slate-500 mt-1">
@@ -169,6 +175,9 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({
                       command.action();
                       onClose();
                     }}
+                    role="option"
+                    aria-selected={index === selectedIndex}
+                    id={`command-${command.id}`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
