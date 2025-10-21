@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ExternalLink, Github, Filter, Calendar, Code2, Brain, Database, Smartphone } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Card } from '../ui/Card';
+import { HoverEffects } from '../interactions/HoverEffects';
 
 const projects = [
   {
@@ -232,7 +233,6 @@ export const Projects: React.FC = () => {
     : projects.filter(project => project.category === selectedCategory);
 
   const featuredProject = projects.find(p => p.featured);
-  const regularProjects = projects.filter(p => !p.featured);
 
   return (
     <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
@@ -356,12 +356,15 @@ export const Projects: React.FC = () => {
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.filter(p => !p.featured).map((project) => (
-            <Card
+            <div
               key={project.id}
-              variant="glass"
-              className="group cursor-pointer overflow-hidden"
               onClick={() => setSelectedProject(selectedProject === project.id ? null : project.id)}
+              className="cursor-pointer"
             >
+              <Card
+                variant="glass"
+                className="group overflow-hidden"
+              >
               {/* Project Image */}
               <div className="relative mb-6">
                 <img
@@ -451,27 +454,32 @@ export const Projects: React.FC = () => {
 
                 {/* Action Buttons */}
                 <div className="flex gap-2 pt-2">
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    icon={ExternalLink}
-                    href={project.demoUrl}
-                    className="flex-1"
-                  >
-                    Demo
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    icon={Github}
-                    href={project.githubUrl}
-                    className="flex-1"
-                  >
-                    Code
-                  </Button>
+                  <HoverEffects effect="scale">
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      icon={ExternalLink}
+                      href={project.demoUrl}
+                      className="flex-1"
+                    >
+                      Demo
+                    </Button>
+                  </HoverEffects>
+                  <HoverEffects effect="scale">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      icon={Github}
+                      href={project.githubUrl}
+                      className="flex-1"
+                    >
+                      Code
+                    </Button>
+                  </HoverEffects>
                 </div>
               </div>
             </Card>
+            </div>
           ))}
         </div>
 
@@ -486,20 +494,24 @@ export const Projects: React.FC = () => {
               Let's discuss how we can bring your ideas to life.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                variant="primary"
-                size="lg"
-                href="#contact"
-              >
-                Start a Conversation
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                href="/resume.pdf"
-              >
-                Download Resume
-              </Button>
+              <HoverEffects effect="glow">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  href="#contact"
+                >
+                  Start a Conversation
+                </Button>
+              </HoverEffects>
+              <HoverEffects effect="scale">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  href="/resume.pdf"
+                >
+                  Download Resume
+                </Button>
+              </HoverEffects>
             </div>
           </Card>
         </div>
