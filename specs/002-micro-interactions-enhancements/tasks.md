@@ -20,9 +20,9 @@
 
 **Purpose**: Project initialization and dependency installation
 
-- [ ] T001 Install required dependencies from research.md
-- [ ] T002 Create component directory structure per plan.md
-- [ ] T003 Create custom hooks directory structure per plan.md
+- [x] T001 Install required dependencies from research.md
+- [x] T002 Create component directory structure per plan.md
+- [x] T003 Create custom hooks directory structure per plan.md
 
 ---
 
