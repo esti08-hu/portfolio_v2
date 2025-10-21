@@ -106,11 +106,11 @@ export const usePerformanceOptimizations = () => {
     return {
       clearUnusedTextures: () => {
         // Implementation would dispose of unused Three.js textures
-        console.log('Clearing unused textures');
+        // console.log('Clearing unused textures');
       },
       clearUnusedGeometries: () => {
         // Implementation would dispose of unused Three.js geometries
-        console.log('Clearing unused geometries');
+        // console.log('Clearing unused geometries');
       },
     };
   }, []);
@@ -147,7 +147,7 @@ export const usePerformanceOptimizations = () => {
       // Set appropriate texture size based on device capabilities
       const maxSize = Math.min(deviceCapabilities.maxTextureSize, 2048);
       if (texture.image && (texture.image.width > maxSize || texture.image.height > maxSize)) {
-        console.warn(`Texture size exceeds device capabilities: ${texture.image.width}x${texture.image.height}`);
+        // console.warn(`Texture size exceeds device capabilities: ${texture.image.width}x${texture.image.height}`);
       }
 
       return texture;
@@ -180,11 +180,11 @@ export const usePerformanceMonitor = (enabled = true) => {
 
     // Log performance warnings
     if (metrics.fps < 30) {
-      console.warn(`Low FPS detected: ${metrics.fps}`);
+      // console.warn(`Low FPS detected: ${metrics.fps}`);
     }
 
     if (metrics.memoryUsage > 100) { // MB
-      console.warn(`High memory usage: ${metrics.memoryUsage}MB`);
+      // console.warn(`High memory usage: ${metrics.memoryUsage}MB`);
     }
   }, [enabled, metrics]);
 
