@@ -1,5 +1,5 @@
 import React from 'react';
-import { DivideIcon as LucideIcon } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -12,6 +12,7 @@ interface ButtonProps {
   iconPosition?: 'left' | 'right';
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
+  'aria-label'?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -25,6 +26,7 @@ export const Button: React.FC<ButtonProps> = ({
   iconPosition = 'left',
   disabled = false,
   type = 'button',
+  'aria-label': ariaLabel,
 }) => {
   const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-95';
   
@@ -53,7 +55,7 @@ export const Button: React.FC<ButtonProps> = ({
   
   if (href) {
     return (
-      <a href={href} className={classes} onClick={onClick}>
+      <a href={href} className={classes} onClick={onClick} aria-label={ariaLabel}>
         {content}
       </a>
     );
@@ -65,6 +67,7 @@ export const Button: React.FC<ButtonProps> = ({
       className={classes}
       onClick={onClick}
       disabled={disabled}
+      aria-label={ariaLabel}
     >
       {content}
     </button>
