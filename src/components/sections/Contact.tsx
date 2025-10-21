@@ -36,7 +36,7 @@ export const Contact: React.FC = () => {
       
       toast.success('Message sent successfully! I\'ll get back to you soon.');
       reset();
-    } catch (error) {
+    } catch {
       toast.error('Failed to send message. Please try again.');
     }
   };

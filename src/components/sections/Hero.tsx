@@ -1,6 +1,8 @@
 import React from 'react';
 import { ArrowRight, Download, Github, ExternalLink } from 'lucide-react';
 import { Button } from '../ui/Button';
+import KineticTypography from '../interactions/KineticTypography';
+import { HoverEffects } from '../interactions/HoverEffects';
 
 const techStack = [
   'Next.js', 'TypeScript', 'NestJS', 'PostgreSQL', 'Docker', 'Python', 'TailwindCSS'
@@ -18,11 +20,18 @@ export const Hero: React.FC = () => {
         <div className="text-center space-y-8">
           {/* Greeting */}
           <div className="space-y-2">
-            <p className="text-blue-400 text-lg font-medium animate-fade-in">
-              Hello, I'm
-            </p>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white animate-fade-in delay-100">
-              <span className="gradient-text">Estifanos Ameha</span>
+            <KineticTypography
+              text="Hello, I'm"
+              variant="fade-in"
+              className="text-blue-400 text-lg font-medium"
+            />
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white">
+              <KineticTypography
+                text="Estifanos Ameha"
+                variant="wave"
+                delay={0.5}
+                className="gradient-text"
+              />
             </h1>
           </div>
 
@@ -40,25 +49,29 @@ export const Hero: React.FC = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in delay-400">
-            <Button 
-              variant="primary" 
-              size="lg" 
-              icon={ArrowRight}
-              iconPosition="right"
-              href="#projects"
-              className="animate-glow"
-            >
-              View My Work
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              icon={Download}
-              href="/resume.pdf"
-              className="hover:bg-white/5"
-            >
-              Download Resume
-            </Button>
+            <HoverEffects effect="glow">
+              <Button 
+                variant="primary" 
+                size="lg" 
+                icon={ArrowRight}
+                iconPosition="right"
+                href="#projects"
+                className="animate-glow"
+              >
+                View My Work
+              </Button>
+            </HoverEffects>
+            <HoverEffects effect="scale">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                icon={Download}
+                href="/resume.pdf"
+                className="hover:bg-white/5"
+              >
+                Download Resume
+              </Button>
+            </HoverEffects>
           </div>
 
           {/* Tech Stack */}
@@ -66,13 +79,14 @@ export const Hero: React.FC = () => {
             <p className="text-neutral-500 text-sm mb-4">Technologies I work with</p>
             <div className="flex flex-wrap justify-center gap-3">
               {techStack.map((tech, index) => (
-                <span
-                  key={tech}
-                  className="px-3 py-1 bg-slate-800/50 border border-slate-700/50 rounded-full text-sm text-neutral-300 hover:border-blue-500/50 hover:text-blue-400 transition-colors duration-300 cursor-default"
-                  style={{ animationDelay: `${600 + index * 100}ms` }}
-                >
-                  {tech}
-                </span>
+                <HoverEffects key={tech} effect="scale">
+                  <span
+                    className="px-3 py-1 bg-slate-800/50 border border-slate-700/50 rounded-full text-sm text-neutral-300 hover:border-blue-500/50 hover:text-blue-400 transition-colors duration-300 cursor-default"
+                    style={{ animationDelay: `${600 + index * 100}ms` }}
+                  >
+                    {tech}
+                  </span>
+                </HoverEffects>
               ))}
             </div>
           </div>

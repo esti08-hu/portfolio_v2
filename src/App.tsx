@@ -9,6 +9,7 @@ import { Projects } from './components/sections/Projects';
 import { Blog } from './components/sections/Blog';
 import { Contact } from './components/sections/Contact';
 import { SEO } from './components/SEO';
+import { CustomCursor } from './components/interactions/CustomCursor';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Contact />
         </main>
         <Footer />
+        <CustomCursor />
         <Toaster 
           position="bottom-right"
           toastOptions={{
