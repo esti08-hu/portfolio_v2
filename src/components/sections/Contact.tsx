@@ -26,13 +26,14 @@ export const Contact: React.FC = () => {
     resolver: zodResolver(contactSchema)
   });
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = async () => {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Here you would typically send the data to your backend
-      console.log('Form submitted:', data);
+      // Handle form submission
+      // console.log('Form submitted:', data);
       
       toast.success('Message sent successfully! I\'ll get back to you soon.');
       reset();

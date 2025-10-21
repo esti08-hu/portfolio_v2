@@ -1,6 +1,6 @@
 // Three.js scene hook for managing 3D experiences and performance
 // T027
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'react-hot-toast';
 import { Header } from './components/layout/Header';
@@ -16,13 +16,15 @@ import DynamicBackgrounds from './components/immersive/DynamicBackgrounds';
 import ExperimentalNav from './components/immersive/ExperimentalNav';
 import GamifiedProjects from './components/immersive/GamifiedProjects';
 import ThemeTransitionProvider from './components/immersive/ThemeTransitionProvider';
-import ThreeScene from './components/advanced/ThreeScene';
-import CommandPalette from './components/advanced/CommandPalette';
-import LoadingAnimation from './components/advanced/LoadingAnimation';
+
+// Lazy load heavy components for better performance
+const ThreeScene = lazy(() => import('./components/advanced/ThreeScene'));
+const CommandPalette = lazy(() => import('./components/advanced/CommandPalette'));
+const LoadingAnimation = lazy(() => import('./components/advanced/LoadingAnimation'));
+const PerformanceMonitor = lazy(() => import('./components/performance/PerformanceMonitor'));
 
 function App() {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   // Command palette commands
   const commands = [
@@ -97,7 +99,9 @@ function App() {
           <DynamicBackgrounds variant="particles" intensity="medium" />
 
           {/* 3D Scene Background */}
-          <ThreeScene scene="portfolio" className="fixed inset-0 pointer-events-none z-0" />
+          <Suspense fallback={null}>
+            <ThreeScene scene="portfolio" className="fixed inset-0 pointer-events-none z-0" />
+          </Suspense>
 
           <Header />
           <ExperimentalNav />
@@ -112,17 +116,32 @@ function App() {
           <Footer />
 
           {/* Advanced UI Components */}
-          <CommandPalette
-            isOpen={isCommandPaletteOpen}
-            onClose={() => setIsCommandPaletteOpen(false)}
-            commands={commands}
-          />
-          <LoadingAnimation
-            isLoading={isLoading}
-            variant="spinner"
-            size="md"
-            className="fixed top-4 right-4 z-50"
-          />
+          <Suspense fallback={null}>
+            <CommandPalette
+              isOpen={isCommandPaletteOpen}
+              onClose={() => setIsCommandPaletteOpen(false)}
+              commands={commands}
+            />
+          </Suspense>
+          <Suspense fallback={null}>
+            <LoadingAnimation
+              isLoading={false}
+              variant="spinner"
+              size="md"
+              className="fixed top-4 right-4 z-50"
+            />
+          </Suspense>
+
+          {/* Performance Monitoring */}
+          <Suspense fallback={null}>
+            <PerformanceMonitor
+              enabled={import.meta.env.PROD}
+              onMetricsCollected={(metrics) => {
+                console.log('Performance metrics:', metrics);
+                // In production, you could send this to analytics
+              }}
+            />
+          </Suspense>
 
           <CustomCursor />
           <Toaster

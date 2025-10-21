@@ -142,16 +142,8 @@ export const useThreeScene = (
   const setQuality = useCallback((quality: ThreeSceneState['quality']) => {
     setSceneState(prev => ({ ...prev, quality }));
 
-    // Adjust quality settings based on performance
-    const qualitySettings = {
-      low: { pixelRatio: 0.5, antialias: false, shadows: false },
-      medium: { pixelRatio: 1, antialias: true, shadows: false },
-      high: { pixelRatio: 1, antialias: true, shadows: true },
-      ultra: { pixelRatio: window.devicePixelRatio || 1, antialias: true, shadows: true },
-    };
-
     // This would be used by the ThreeScene component
-    console.log('Quality settings:', qualitySettings[quality]);
+    // console.log('Quality settings:', qualitySettings[quality]);
   }, []);
 
   // Scene lifecycle management
@@ -234,10 +226,10 @@ export const useThreeScene = (
     const { fps } = sceneState.performance;
 
     if (fps < 30 && sceneState.quality !== 'low') {
-      console.warn('Low FPS detected, reducing quality');
+      // console.warn('Low FPS detected, reducing quality');
       setQuality('low');
     } else if (fps < 45 && sceneState.quality === 'ultra') {
-      console.warn('Moderate FPS detected, reducing quality');
+      // console.warn('Moderate FPS detected, reducing quality');
       setQuality('high');
     }
   }, [sceneState.performance, sceneState.quality, enablePerformanceMonitoring, setQuality]);

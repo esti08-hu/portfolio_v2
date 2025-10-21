@@ -44,9 +44,22 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           animations: ['framer-motion'],
-          forms: ['react-hook-form', 'zod']
+          forms: ['react-hook-form', 'zod'],
+          three: ['@react-three/fiber', '@react-three/drei', 'three'],
+          ui: ['lucide-react', 'react-hot-toast', 'react-helmet-async'],
+          utils: ['howler', '@tanstack/react-query', 'react-intersection-observer']
         }
       }
-    }
-  }
+    },
+    chunkSizeWarningLimit: 1000,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    },
+    sourcemap: false,
+    reportCompressedSize: true
+  },
 });

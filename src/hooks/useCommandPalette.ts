@@ -114,7 +114,7 @@ export const useCommandPalette = (
       keywords: ['theme', 'dark', 'light', 'mode'],
       action: () => {
         // This would integrate with theme system
-        console.log('Theme toggle action');
+        // console.log('Theme toggle action');
       },
     },
     {
