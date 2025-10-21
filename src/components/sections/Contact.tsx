@@ -26,17 +26,18 @@ export const Contact: React.FC = () => {
     resolver: zodResolver(contactSchema)
   });
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = async () => {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Here you would typically send the data to your backend
-      console.log('Form submitted:', data);
+      // Handle form submission
+      // console.log('Form submitted:', data);
       
       toast.success('Message sent successfully! I\'ll get back to you soon.');
       reset();
-    } catch (error) {
+    } catch {
       toast.error('Failed to send message. Please try again.');
     }
   };
@@ -155,7 +156,9 @@ export const Contact: React.FC = () => {
           {/* Contact Form */}
           <Card variant="glass">
             <h3 className="text-2xl font-semibold text-white mb-6">Send Message</h3>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+              <fieldset>
+                <legend className="sr-only">Contact Form</legend>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-neutral-300 mb-2">
                   Full Name *
@@ -166,9 +169,13 @@ export const Contact: React.FC = () => {
                   id="name"
                   className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-neutral-400 transition-colors duration-300"
                   placeholder="Your full name"
+                  aria-describedby={errors.name ? "name-error" : undefined}
+                  aria-invalid={!!errors.name}
                 />
                 {errors.name && (
-                  <p className="mt-1 text-sm text-red-400">{errors.name.message}</p>
+                  <p id="name-error" className="mt-1 text-sm text-red-400" role="alert">
+                    {errors.name.message}
+                  </p>
                 )}
               </div>
 
@@ -182,9 +189,13 @@ export const Contact: React.FC = () => {
                   id="email"
                   className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-neutral-400 transition-colors duration-300"
                   placeholder="email@example.com"
+                  aria-describedby={errors.email ? "email-error" : undefined}
+                  aria-invalid={!!errors.email}
                 />
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-400">{errors.email.message}</p>
+                  <p id="email-error" className="mt-1 text-sm text-red-400" role="alert">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
 
@@ -198,9 +209,13 @@ export const Contact: React.FC = () => {
                   id="subject"
                   className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-neutral-400 transition-colors duration-300"
                   placeholder="What's this about?"
+                  aria-describedby={errors.subject ? "subject-error" : undefined}
+                  aria-invalid={!!errors.subject}
                 />
                 {errors.subject && (
-                  <p className="mt-1 text-sm text-red-400">{errors.subject.message}</p>
+                  <p id="subject-error" className="mt-1 text-sm text-red-400" role="alert">
+                    {errors.subject.message}
+                  </p>
                 )}
               </div>
 
@@ -214,9 +229,13 @@ export const Contact: React.FC = () => {
                   rows={5}
                   className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-neutral-400 transition-colors duration-300 resize-none"
                   placeholder="Tell me about your project or idea..."
+                  aria-describedby={errors.message ? "message-error" : undefined}
+                  aria-invalid={!!errors.message}
                 />
                 {errors.message && (
-                  <p className="mt-1 text-sm text-red-400">{errors.message.message}</p>
+                  <p id="message-error" className="mt-1 text-sm text-red-400" role="alert">
+                    {errors.message.message}
+                  </p>
                 )}
               </div>
 
@@ -231,6 +250,7 @@ export const Contact: React.FC = () => {
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
+              </fieldset>
             </form>
           </Card>
         </div>

@@ -131,6 +131,14 @@ body {
   border-radius: 12px;
 }
 
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(12px)) {
+  .glass-card {
+    background: rgba(30, 41, 59, 0.95);
+    backdrop-filter: none;
+  }
+}
+
 .gradient-text {
   background: var(--gradient-primary);
   -webkit-background-clip: text;

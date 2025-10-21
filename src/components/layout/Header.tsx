@@ -41,7 +41,7 @@ export const Header: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="#home" className="text-2xl font-bold gradient-text">
+            <a href="#home" className="text-2xl font-bold gradient-text" aria-label="EstifanosAmeha - Go to home section">
               EstifanosAmeha
             </a>
           </div>
@@ -71,11 +71,12 @@ export const Header: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-400 hover:text-blue-400 transition-colors duration-300"
+                aria-label={`Visit ${link.name} profile`}
               >
                 <link.icon size={20} />
               </a>
             ))}
-            <Button variant="primary" size="sm" className="ml-4">
+            <Button variant="primary" size="sm" className="ml-4" href="#contact" aria-label="Go to contact section">
               Let's Talk
             </Button>
           </div>
@@ -85,6 +86,9 @@ export const Header: React.FC = () => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-neutral-400 hover:text-white focus:outline-none focus:text-white transition-colors duration-300"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -93,7 +97,7 @@ export const Header: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden">
+          <div id="mobile-menu" className="md:hidden" role="navigation" aria-label="Mobile navigation">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-slate-900/95 backdrop-blur-md rounded-lg mt-2 border border-slate-700/50">
               {navigation.map((item) => (
                 <a
@@ -113,6 +117,7 @@ export const Header: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-neutral-400 hover:text-blue-400 transition-colors duration-300"
+                    aria-label={`Visit ${link.name} profile`}
                   >
                     <link.icon size={20} />
                   </a>

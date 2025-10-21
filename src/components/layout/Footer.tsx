@@ -17,7 +17,7 @@ const quickLinks = [
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-slate-900/50 border-t border-slate-700/50 backdrop-blur-sm">
+    <footer className="bg-slate-900/50 border-t border-slate-700/50 backdrop-blur-sm" role="contentinfo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand & Quote */}
@@ -55,6 +55,7 @@ export const Footer: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-neutral-400 hover:text-blue-400 transition-colors duration-300 p-2 rounded-lg hover:bg-blue-500/10"
+                  aria-label={`Visit ${link.name} profile`}
                 >
                   <link.icon size={20} />
                 </a>
@@ -72,7 +73,7 @@ export const Footer: React.FC = () => {
             © {new Date().getFullYear()} EstifanosAmeha. All rights reserved.
           </p>
           <p className="text-neutral-500 text-sm flex items-center gap-1 mt-2 sm:mt-0">
-            Made with <Heart size={14} className="text-red-400" /> using React & Tailwind CSS
+            Made with <Heart size={14} className="text-red-400" aria-hidden="true" /> using React & Tailwind CSS
           </p>
         </div>
       </div>
